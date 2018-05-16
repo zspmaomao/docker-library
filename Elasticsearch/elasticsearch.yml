@@ -1,0 +1,127 @@
+# ======================== Elasticsearch Configuration =========================
+#
+# NOTE: Elasticsearch comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please consult the documentation for further information on configuration options:
+# https://www.elastic.co/guide/en/elasticsearch/reference/index.html
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+# Use a descriptive name for your cluster:
+#
+ cluster.name: test-es
+#
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+#
+ node.name: ${HOSTNAME}
+#
+# Add custom attributes to the node:
+#
+#node.attr.rack: r1
+#
+# add
+ node.master: true
+ node.data: true
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+ path.data: /usr/share/elasticsearch/data
+#
+# Path to log files:
+#
+ path.logs: /usr/share/elasticsearch/logs
+#
+# ----------------------------------- Memory -----------------------------------
+#
+# Lock the memory on startup:
+#
+ bootstrap.memory_lock: false
+#
+# Make sure that the heap size is set to about half the memory available
+# on the system and that the owner of the process is allowed to use this
+# limit.
+#
+# Elasticsearch performs poorly when the system is swapping the memory.
+#
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+#
+ network.host: 127.0.0.1
+#
+# Set a custom port for HTTP:
+#
+ http.port: 9200
+#
+ http.enabled: true
+# For more information, see the documentation at:
+# <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
+#
+# --------------------------------- Discovery ----------------------------------
+#
+# Pass an initial list of hosts to perform discovery when new node is started:
+# The default list of hosts is ["127.0.0.1", "[::1]"]
+#
+# discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+# Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
+#
+#discovery.zen.minimum_master_nodes: 3
+#
+ discovery.zen.fd.ping_interval: 1s
+#
+ discovery.zen.fd.ping_timeout: 30s
+#
+ discovery.zen.fd.ping_retries: 5
+# For more information, consult the zen discovery module documentation.
+#
+# ---------------------------------- Indices -----------------------------------
+
+# action.auto_create_index: true   
+# action.disable_delete_all_indices: true
+# indices.memory.index_buffer_size: 30%
+# indices.memory.min_shard_index_buffer_size: 12mb
+# indices.memory.min_index_buffer_size: 96mb
+# action.write_consistency: one
+# index.number_of_shards: 3
+# index.number_of_replicas: 1
+# index.refresh_interval: 30s
+# index.translog.flush_threshold_ops: 50000
+# indices.fielddata.cache.size: 15%
+# indices.fielddata.cache.expire: 6h
+# indices.cache.filter.size: 15%
+# indices.cache.filter.expire: 6h
+# threadpool:
+#  bulk:
+#   type: fixed
+#   queue_size: 300
+
+# index.translog.flush_threshold_period: 10m
+# ---------------------------------- Gateway -----------------------------------
+#
+# Block initial recovery after a full cluster restart until N nodes are started:
+#
+#gateway.recover_after_nodes: 3
+#
+# For more information, consult the gateway module documentation.
+#
+# ---------------------------------- Various -----------------------------------
+#
+# Require explicit names when deleting indices:
+#
+#action.destructive_requires_name: true
+ http.cors.enabled: true
+ http.cors.allow-credentials: true
+ http.cors.allow-methods: OPTIONS,HEAD,GET,POST,PUT,DELETE
+ http.cors.max-age: 0
+ http.cors.allow-origin: "*"
+ http.cors.allow-headers: "X-Requested-With, Content-Type, Content-Length, accept, authorization"
+ xpack.security.enabled: false
+
